@@ -1,14 +1,26 @@
 /**
  * @author Ryan Perry
  */
+function handleResult(result) {
+	maxSizeImgUrl = result.url.replace("1024","");
+	document.body.style.backgroundImage = "url(" + maxSizeImgUrl + ")";
+	document.body.style.backgroundRepeat = "no-repeat";
+	document.body.style.backgroundAttachment = "fixed";
+	document.body.style.backgroundSize = "cover";
+	document.body.style.animationName = "bg-transform";
+	document.body.style.animationDuration = "60s";
+	document.body.style.animationIterationCount = "infinite";
+};
 
+function onLoad() {
+	
+}
+function animateBg() {
+	
+}
 $.ajax({
 	url:"https://api.nasa.gov/planetary/apod?api_key=***REMOVED***",
 	success: handleResult
 });
 
-function handleResult(result) {
-	document.body.style.backgroundImage = "url(" + result.url + ")";
-	document.body.style.backgroundRepeat = "no-repeat";
-	document.body.style.backgroundSize = "cover";
-};
+$(window).load( onLoad );
