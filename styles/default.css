@@ -1,0 +1,51 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@keyframes flexbox {
+	from{width: 0%;};
+	to{width: 100%;};
+}
+@-webkit-keyframes bg-transform {
+	0% {background-position: 0% 100%;}
+	50% {background-position: 100% 0%;}
+	100% {background-position: 0% 100%;}
+}
+h1, p {
+	font-family: "Open Sans", "Lucida Grande", sans-serif;
+	color: White;
+	text-align:center;
+}
+p {
+	font-size: small;
+}
+html {
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	height: inherit;
+}
+footer {
+	position: fixed;
+	bottom: 0;
+}
+.content {
+	height: 100%;
+	display: flex;
+	flex-flow: flex-flox;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.flexbox {
+	width: 100%;
+	display: flex;
+	flex-flow: flex-flox;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	animation-name: flexbox;
+	animation-duration: 1s;
+}
+#centre-title {
+	flex: 1;
+	background-color: rgba(0, 0, 0, 0.6);
+}
