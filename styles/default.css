@@ -8,10 +8,13 @@
 	50% {background-position: 100% 0%;}
 	100% {background-position: 0% 100%;}
 }
-h1, p {
+h1, p, seconds {
 	font-family: "Open Sans", "Lucida Grande", sans-serif;
 	color: White;
 	text-align:center;
+}
+seconds {
+	font-size: large;
 }
 p {
 	font-size: small;
