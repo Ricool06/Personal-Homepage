@@ -21,16 +21,29 @@ p {
 }
 html {
 	height: 100%;
-	overflow: hidden;
+	margin: 0;
+	padding: 0;
 }
 body {
 	height: inherit;
+	margin: 0;
+	padding: 0;
 }
 footer {
+	background-color: rgba(0, 0, 0, 0.6);
 	position: fixed;
 	bottom: 0;
+	width: 100%;
+	display: flex;
+	flex-flow: flex-flow;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	transition: background-color 4s;
 }
 .content {
+	margin: 0;
+	padding: 0;
 	height: 100%;
 	display: flex;
 	flex-flow: flex-flox;
@@ -41,7 +54,7 @@ footer {
 .flexbox {
 	width: 100%;
 	display: flex;
-	flex-flow: flex-flox;
+	flex-flow: flex-flow;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
@@ -51,4 +64,11 @@ footer {
 #centre-title {
 	flex: 1;
 	background-color: rgba(0, 0, 0, 0.6);
+	transition: background-color 4s;
+}
+#copyright, #icons {
+	flex-grow: 1;
+}
+#footer-separator {
+	flex-grow: 8;
 }
