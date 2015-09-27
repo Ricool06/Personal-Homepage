@@ -35,7 +35,7 @@ footer {
 	bottom: 0;
 	width: 100%;
 	display: flex;
-	flex-flow: flex-flow;
+	flex-flow: row nowrap;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
@@ -67,8 +67,13 @@ footer {
 	transition: background-color 4s;
 }
 #copyright, #icons {
-	flex-grow: 1;
+	flex-shrink: 0;
+	flex-wrap: nowrap;
 }
 #footer-separator {
-	flex-grow: 8;
+	flex-grow: 4;
+}
+#reveal-text {
+	margin: 10em;
+	display: none;
 }
