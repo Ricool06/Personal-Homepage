@@ -3,6 +3,7 @@
  */
 function onLoad() {
 	clock(document.getElementById("clock"));
+	getDominantColorFromBg();
 }
 
 function handleApodResult(result) {
@@ -57,7 +58,6 @@ function normalizeTime(h,m,s) {
 }
 
 function getDominantColorFromBg() {
-	console.log(["DOMCOLOR","workpls"]);
 	invisImg = new Image;
 	c = document.createElement("canvas");
 	ctx = c.getContext("2d");
@@ -68,7 +68,7 @@ function getDominantColorFromBg() {
 	//CORS (cross origin resource sharing) has been enabled for APOD for anyone.
 	//Therefore, as long as invisImg's crossOrigin request is set to something, even Anonymous, it will work.
 		
-	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?&api_key=7aew7vcw7rzahpdR8apwkGsAdyWI6Ji8zCE44ACD";
+	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?date=2015-09-23&api_key=7aew7vcw7rzahpdR8apwkGsAdyWI6Ji8zCE44ACD";
 	invisImg.onload = function(){
 		c.width = invisImg.width;
 		c.height = invisImg.height;
@@ -89,14 +89,19 @@ function getDominantColorFromBg() {
 		blueAverage = Math.round(primaryColours[2] / colourComponentAmount);
 		alphaAverage = Math.round(primaryColours[3] / colourComponentAmount);
 		
-		console.log(""+redAverage+","+greenAverage+","+blueAverage+","+alphaAverage);
-		
-		document.getElementById("centre-title").style.backgroundColor = 'rgba('+redAverage+','+greenAverage+','+blueAverage+',0.6)';
+		rgba = 'rgba('+redAverage+','+greenAverage+','+blueAverage+','+0.6+')';
+		setUIColour([document.getElementById("centre-title"), document.getElementById("footer")], rgba);
 	};
 }
 
+function setUIColour(elements, rgba){
+	for(i = 0; i < elements.length; i++){
+		elements[i].style.backgroundColor = rgba;
+	}
+}
+
 $.ajax({
-	url:"https://api.nasa.gov/planetary/apod?api_key=7aew7vcw7rzahpdR8apwkGsAdyWI6Ji8zCE44ACD",
+	url:"https://api.nasa.gov/planetary/apod?date=2015-09-23&api_key=7aew7vcw7rzahpdR8apwkGsAdyWI6Ji8zCE44ACD",
 	success: handleApodResult
 });
 
