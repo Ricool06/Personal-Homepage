@@ -4,6 +4,7 @@
 function onLoad() {
 	clock(document.getElementById("clock"));
 	getDominantColorFromBg();
+	initialFooterHeight = $( "#footer" ).height();
 }
 
 function handleApodResult(result) {
@@ -15,13 +16,13 @@ function handleApodResult(result) {
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState == 4 && xhr.status == 200) {
 				setBg(maxSizeImgUrl);
-				getDominantColorFromBg(imgUrl);
 		}
 		else{
 			setBg(imgUrl);
-			getDominantColorFromBg(imgUrl);
 		}
 	};
+	getDominantColorFromBg(imgUrl);
+	explanation = result.explanation;
 };
 
 function setBg(url) {
@@ -68,7 +69,7 @@ function getDominantColorFromBg() {
 	//CORS (cross origin resource sharing) has been enabled for APOD for anyone.
 	//Therefore, as long as invisImg's crossOrigin request is set to something, even Anonymous, it will work.
 		
-	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?api_key=***REMOVED***";
+	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?date=2015-08-16&api_key=***REMOVED***";
 	invisImg.onload = function(){
 		c.width = invisImg.width;
 		c.height = invisImg.height;
@@ -100,10 +101,38 @@ function setUIColour(elements, rgba){
 	}
 }
 
+function toggleInfo(){
+	if(infoToggle){
+		$( "#footer" ).animate({height: ""+initialFooterHeight+"px" });
+		$( "#reveal-text" ).fadeOut(250);
+		showClock();
+	}else{
+		$( "#footer" ).animate({height: "100%"});
+		hideClock();
+		document.getElementById("reveal-text").innerText = explanation;
+		$( "#reveal-text" ).fadeIn(250);
+	}
+	infoToggle = !infoToggle;
+}
+
+function hideClock(){
+	$( "#centre-title" ).fadeTo("fast", 0);
+	$( "#clock" ).fadeTo("fast", 0);
+}
+function showClock(){
+	$( "#centre-title" ).fadeTo("slow", 1);
+	$( "#clock" ).fadeTo("slow", 1);
+}
+
 $.ajax({
-	url:"https://api.nasa.gov/planetary/apod?api_key=***REMOVED***",
+	url:"https://api.nasa.gov/planetary/apod?date=2015-08-16&api_key=***REMOVED***",
 	success: handleApodResult
 });
 
+infoToggle = false;
+initialFooterHeight = 0;
+explanation = "";
+
 $(window).load( onLoad );
 
+//test date for APOD colourful image: date=2015-08-16&
