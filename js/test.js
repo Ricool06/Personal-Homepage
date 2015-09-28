@@ -4,6 +4,7 @@
 function onLoad() {
 	clock(document.getElementById("clock"));
 	getDominantColorFromBg();
+	initialFooterHeight = $( "#footer" ).height();
 }
 
 function handleApodResult(result) {
@@ -15,13 +16,15 @@ function handleApodResult(result) {
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState == 4 && xhr.status == 200) {
 				setBg(maxSizeImgUrl);
-				getDominantColorFromBg(imgUrl);
 		}
 		else{
 			setBg(imgUrl);
-			getDominantColorFromBg(imgUrl);
 		}
 	};
+	getDominantColorFromBg(imgUrl);
+	title = result.title;
+	explanation = result.explanation;
+	revealText = "<h1>" + title + "</h1>\n<p>" + explanation + "</p>";
 };
 
 function setBg(url) {
@@ -100,10 +103,40 @@ function setUIColour(elements, rgba){
 	}
 }
 
+function toggleInfo(){
+	if(infoToggle){
+		$( "#footer" ).animate({height: ""+initialFooterHeight+"px" });
+		$( "#reveal-text" ).fadeOut(250);
+		showClock();
+	}else{
+		$( "#footer" ).animate({height: "100%"});
+		hideClock();
+		document.getElementById("reveal-text").innerHTML = revealText;
+		$( "#reveal-text" ).fadeIn(250);
+	}
+	infoToggle = !infoToggle;
+}
+
+function hideClock(){
+	$( "#centre-title" ).fadeTo("fast", 0);
+	$( "#clock" ).fadeTo("fast", 0);
+}
+function showClock(){
+	$( "#centre-title" ).fadeTo("slow", 1);
+	$( "#clock" ).fadeTo("slow", 1);
+}
+
 $.ajax({
 	url:"https://api.nasa.gov/planetary/apod?api_key=***REMOVED***",
 	success: handleApodResult
 });
 
+infoToggle = false;
+initialFooterHeight = 0;
+explanation = "";
+title = "";
+revealText = "";
+
 $(window).load( onLoad );
 
+//test date for APOD colourful image: date=2015-08-16&
