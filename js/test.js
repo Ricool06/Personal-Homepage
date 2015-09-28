@@ -22,7 +22,9 @@ function handleApodResult(result) {
 		}
 	};
 	getDominantColorFromBg(imgUrl);
+	title = result.title;
 	explanation = result.explanation;
+	revealText = "<h1>" + title + "</h1>\n<p>" + explanation + "</p>";
 };
 
 function setBg(url) {
@@ -69,7 +71,7 @@ function getDominantColorFromBg() {
 	//CORS (cross origin resource sharing) has been enabled for APOD for anyone.
 	//Therefore, as long as invisImg's crossOrigin request is set to something, even Anonymous, it will work.
 		
-	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?date=2015-08-16&api_key=***REMOVED***";
+	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?api_key=***REMOVED***";
 	invisImg.onload = function(){
 		c.width = invisImg.width;
 		c.height = invisImg.height;
@@ -109,7 +111,7 @@ function toggleInfo(){
 	}else{
 		$( "#footer" ).animate({height: "100%"});
 		hideClock();
-		document.getElementById("reveal-text").innerText = explanation;
+		document.getElementById("reveal-text").innerHTML = revealText;
 		$( "#reveal-text" ).fadeIn(250);
 	}
 	infoToggle = !infoToggle;
@@ -125,13 +127,15 @@ function showClock(){
 }
 
 $.ajax({
-	url:"https://api.nasa.gov/planetary/apod?date=2015-08-16&api_key=***REMOVED***",
+	url:"https://api.nasa.gov/planetary/apod?api_key=***REMOVED***",
 	success: handleApodResult
 });
 
 infoToggle = false;
 initialFooterHeight = 0;
 explanation = "";
+title = "";
+revealText = "";
 
 $(window).load( onLoad );
 
