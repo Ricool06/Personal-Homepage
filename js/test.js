@@ -9,18 +9,9 @@ function onLoad() {
 
 function handleApodResult(result) {
 	imgUrl = result.url;
+	hdUrl = result.hdurl;
 	maxSizeImgUrl = imgUrl.replace("1024","2048");
-	xhr = new XMLHttpRequest();
-	xhr.open("GET", maxSizeImgUrl, true);
-	xhr.send();
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState == 4 && xhr.status == 200) {
-				setBg(maxSizeImgUrl);
-		}
-		else{
-			setBg(imgUrl);
-		}
-	};
+	setBg(hdUrl);
 	getDominantColorFromBg(imgUrl);
 	title = result.title;
 	explanation = result.explanation;
@@ -71,7 +62,7 @@ function getDominantColorFromBg() {
 	//CORS (cross origin resource sharing) has been enabled for APOD for anyone.
 	//Therefore, as long as invisImg's crossOrigin request is set to something, even Anonymous, it will work.
 		
-	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?api_key=7aew7vcw7rzahpdR8apwkGsAdyWI6Ji8zCE44ACD";
+	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?api_key=";
 	invisImg.onload = function(){
 		c.width = invisImg.width;
 		c.height = invisImg.height;
@@ -127,7 +118,7 @@ function showClock(){
 }
 
 $.ajax({
-	url:"https://api.nasa.gov/planetary/apod?api_key=7aew7vcw7rzahpdR8apwkGsAdyWI6Ji8zCE44ACD",
+	url:"https://api.nasa.gov/planetary/apod?hd=True&api_key=",
 	success: handleApodResult
 });
 
@@ -140,3 +131,4 @@ revealText = "";
 $(window).load( onLoad );
 
 //test date for APOD colourful image: date=2015-08-16&
+//?direct and ?hd are not mentioned in the official documentation for APOD. However if you go to https://github.com/nasa/api-docs/issues/ you can find some API parameters that are very useful.
