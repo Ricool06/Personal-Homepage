@@ -55,7 +55,7 @@ function getDominantColorFromBg() {
 	invisImg = new Image;
 	c = document.createElement("canvas");
 	ctx = c.getContext("2d");
-	
+
 	invisImg.crossOrigin = "Anonymous";
 	//Must set this before setting invisImg src otherwise, we get a cross-origin error.
 	//Cross-origin error is when a local script tries to access potentially sensitive data on a remote DOM.
@@ -68,9 +68,9 @@ function getDominantColorFromBg() {
 		c.height = invisImg.height;
 		ctx.drawImage(invisImg,0,0);
 		imgData = ctx.getImageData(1, 1, c.width, c.height);
-		
+
 		primaryColours = [0,0,0,0];
-	
+
 		for(i = 0; i < (imgData.data.length); i+=4){
 			primaryColours[0] += imgData.data[i+0];
 			primaryColours[1] += imgData.data[i+1];
@@ -82,7 +82,7 @@ function getDominantColorFromBg() {
 		greenAverage = Math.round(primaryColours[1] / colourComponentAmount);
 		blueAverage = Math.round(primaryColours[2] / colourComponentAmount);
 		alphaAverage = Math.round(primaryColours[3] / colourComponentAmount);
-		
+
 		rgba = 'rgba('+redAverage+','+greenAverage+','+blueAverage+','+0.6+')';
 		setUIColour([document.getElementById("centre-title"), document.getElementById("footer")], rgba);
 	};
