@@ -62,7 +62,7 @@ function getDominantColorFromBg() {
 	//CORS (cross origin resource sharing) has been enabled for APOD for anyone.
 	//Therefore, as long as invisImg's crossOrigin request is set to something, even Anonymous, it will work.
 
-	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?api_key=";
+	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?api_key=" + getKey();
 	invisImg.onload = function(){
 		c.width = invisImg.width;
 		c.height = invisImg.height;
@@ -118,7 +118,7 @@ function showClock(){
 }
 
 $.ajax({
-	url:"https://api.nasa.gov/planetary/apod?hd=True&api_key=",
+	url:"https://api.nasa.gov/planetary/apod?hd=True&api_key=" + getKey(),
 	success: handleApodResult
 });
 
