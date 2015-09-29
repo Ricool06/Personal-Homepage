@@ -61,7 +61,7 @@ function getDominantColorFromBg() {
 	//Cross-origin error is when a local script tries to access potentially sensitive data on a remote DOM.
 	//CORS (cross origin resource sharing) has been enabled for APOD for anyone.
 	//Therefore, as long as invisImg's crossOrigin request is set to something, even Anonymous, it will work.
-		
+
 	invisImg.src = "https://api.nasa.gov/planetary/apod/direct?api_key=";
 	invisImg.onload = function(){
 		c.width = invisImg.width;
