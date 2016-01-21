@@ -1,3 +1,4 @@
 *.jar
 bfg.jar
 js/apikey.js
+js/getKey.js
