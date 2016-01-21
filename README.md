@@ -1,5 +1,6 @@
 # Personal-Homepage
-A homepage for my own personal use.
+A homepage for personal use.
+Grabs today's image from NASA's astronomy picture of the day and displays it, shows the time, and allows the expansion of the footer to display information about the picture.
 
 To use:
 
